@@ -1,6 +1,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.animation import FuncAnimation
 
 X=0
 Y=1
@@ -41,4 +42,6 @@ def plotXandYfor1Spin(S,t):
     plt.plot(t,y)
     plt.plot(t,length,color="red")
     plt.show()
+
+
 

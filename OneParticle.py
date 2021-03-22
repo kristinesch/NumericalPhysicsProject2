@@ -11,5 +11,7 @@ H1=Hj1(B1,mu)
 S1=np.load("S1.npy")
 t1=np.load("t1.npy")
 
-plotXandYfor1Spin(S1,t1)
-plot1Spin(S1,len(t1)-1)
+#plotXandYfor1Spin(S1,t1)
+#plot1Spin(S1,len(t1)-1)
+
+spinAnimation(S1)

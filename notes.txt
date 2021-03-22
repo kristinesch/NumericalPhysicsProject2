@@ -2,3 +2,4 @@ Data structure:
 
 N particles saved in N*3 array 
 each row is one particle, each column contains the spin component in each directions x, y and z
+
