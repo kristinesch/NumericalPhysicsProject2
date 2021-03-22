@@ -6,7 +6,7 @@ Z=2
 
 h=0.01
 alfa=0 #damping
-gamma=0.5 #idk
-J=0.5 #???
-mu=0.5 #idk
-B0=1 #??
+gamma=1 #idk
+J=1 #Coupling, not yet used
+mu=1 #idk
+B0=1 #idk??

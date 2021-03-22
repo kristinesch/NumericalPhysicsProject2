@@ -29,18 +29,43 @@ def f(S,mu,gamma,alfa,H): #H and S are arrays of vectors
     return (-gamma/(np.abs(mu)*(1+alfa*alfa)))*(ScrossH+np.cross((alfa*S),ScrossH))
 
 
-"""Heun method function"""
-#T is the total time
-def Heun(h,S0,T,mu,gamma,alfa,Hj,SFile,tFile): 
+"""Heun method"""
+
+def Heun(h,S0,T,mu,gamma,alfa,Hj,SFile,tFile): #T is the total time
     print(S0)
     N=len(S0)
     t=np.arange(0,T,h)
     S=np.zeros((len(t),N,3))
-    S[0]=S0
+    S[0]=S0.copy()
     print("S",S)
     for i in range(len(t)-1):
-        print("i",i)
+        print(i/len(t))
         S_intermediate=S[i]+h*f(S[i],mu,gamma,alfa,Hj)
         S[i+1]=S[i]+(h/2)*(f(S[i],mu,gamma,alfa,Hj)+f(S_intermediate,mu,gamma,alfa,Hj))
+    np.save(SFile,S)
+    np.save(tFile,t)
+
+"""Euler method"""
+
+def Euler(h,S0,T,mu,gamma,alfa,Hj,SFile,tFile):
+    N=len(S0)
+    t=np.arange(0,T,h)
+    S=np.zeros((len(t),N,3))
+    S[0]=S0.copy()
+    for i in range(len(t)-1):
+        S[i+1]=S[i]+h*f(S[i],mu,gamma,alfa,Hj)
+    np.save(SFile,S)
+    np.save(tFile,t)
+
+"""Error estimate"""
+
+def analyticSol1Particle(h,T,S0,SFile,tFile):
+    N=len(S0)
+    t=np.arange(0,T,h)
+    S=np.zeros((len(t),N,3))
+    for i in range(len(t)):
+        S[i,X]=np.cos(t[i])
+        S[i,Y]=np.sin(t[i])
+        S[i,Z]=0
     np.save(SFile,S)
     np.save(tFile,t)

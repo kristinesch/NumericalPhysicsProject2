@@ -43,5 +43,21 @@ def plotXandYfor1Spin(S,t):
     plt.plot(t,length,color="red")
     plt.show()
 
+#comparing Heund, Euler and analytic solution for 1 spin
+def compareSolutions(SHeundFile,SEulerFile,SAnalyticFile,tFile,filename):
+    SHeund=np.load(SHeundFile)
+    SEuler=np.load(SEulerFile)
+    SAnalytic=np.load(SAnalyticFile)
+    t=np.load(tFile)
+    print(SHeund)
+    fig, ax=plt.subplots(1,1)
+    ax.plot(t,SHeund[:,0,X],label="Heund")
+    ax.plot(t,SEuler[:,0,X],label="Euler")
+    ax.plot(t,SAnalytic[:,0,X],label="Analytic")
+    fig.legend()
+    fig.savefig(filename)
+    plt.show()
+
+
 
 

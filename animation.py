@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.animation import FuncAnimation
+
 #for only 1 spin first
 X=0
 Y=1
