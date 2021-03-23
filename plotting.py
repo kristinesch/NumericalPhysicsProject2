@@ -15,11 +15,11 @@ def plotLastFrame(S,ti):
     x, y, z = np.meshgrid(np.arange(-0.8, 1, 0.2),
                         np.arange(-0.8, 1, 0.2),
                         np.arange(-0.8, 1, 0.8))
-
-
     ax.quiver(x, y, z, S[ti,:,X], S[ti,:,Y], S[ti,:,Z], length=0.1, normalize=True)
 
     plt.show()
+
+
 
 def plot1Spin(S,ti):
     fig = plt.figure()
@@ -34,6 +34,8 @@ def plot1Spin(S,ti):
 
     plt.show()
 
+
+
 def plotXandYfor1Spin(S,t):
     x=S[:,:,X]
     y=S[:,:,Y]
@@ -43,15 +45,22 @@ def plotXandYfor1Spin(S,t):
     plt.plot(t,length,color="red")
     plt.show()
 
+
+
 #comparing Heund, Euler and analytic solution for 1 spin
 def compareSolutions(SHeundFile,SEulerFile,SAnalyticFile,tFile,filename):
     SHeund=np.load(SHeundFile)
     SEuler=np.load(SEulerFile)
     SAnalytic=np.load(SAnalyticFile)
     t=np.load(tFile)
-    print(SHeund)
+
+
+    #Plotting:
     fig, ax=plt.subplots(1,1)
-    ax.plot(t,SHeund[:,0,X],label="Heund")
+    ax.set_xlabel("time")
+    ax.set_ylabel("x")
+    fig.suptitle("Oscillation of x-coordinate for one spin")
+    ax.plot(t,SHeund[:,0,X],label="Heun")
     ax.plot(t,SEuler[:,0,X],label="Euler")
     ax.plot(t,SAnalytic[:,0,X],label="Analytic")
     fig.legend()
@@ -59,5 +68,16 @@ def compareSolutions(SHeundFile,SEulerFile,SAnalyticFile,tFile,filename):
     plt.show()
 
 
+
+def plotErrorVsStepsize(HeunError,HeunSteps,EulerError,EulerSteps,filename):
+    fig, ax=plt.subplots(1,1)
+    ax.set_xlabel("Step size")
+    ax.set_ylabel("Error")
+    fig.suptitle("Error as a function of step size")
+    ax.plot(HeunSteps,HeunError,label="Heun")
+    ax.plot(EulerSteps,EulerError,label="Euler")
+    fig.legend()
+    fig.savefig(filename)
+    plt.show()
 
 

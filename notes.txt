@@ -1,3 +1,7 @@
+TO DO:
+Error as percentage? What is the best way to quantify the error?
+
+
 Data structure:
 
 N particles saved in N*3 array 
