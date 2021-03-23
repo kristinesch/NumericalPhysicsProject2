@@ -41,7 +41,6 @@ def Heun(h,S0,T,mu,gamma,alfa,Hj,oneSpin=False): #T is the total time
     S=np.zeros((len(t),N,3))
     S[0]=S0.copy()
     for i in range(len(t)-1):
-        print(i/len(t))
         S_intermediate=S[i]+h*f(S[i],mu,gamma,alfa,Hj)
         S[i+1]=S[i]+(h/2)*(f(S[i],mu,gamma,alfa,Hj)+f(S_intermediate,mu,gamma,alfa,Hj))
     return S, t
@@ -80,17 +79,18 @@ def analyticSol1Particle(h,T,S0,Hj):
     return S, t
 
 
-#calculates total error: the difference between two arrays
+#calculates total error: the difference between two arrays after a given time (last elements of arrays)
 #NB written for only 1 spin
 def calculateError(Snum, Sanalytic): 
     #print("YO",Sanalytic)
-    errors=np.abs(Snum[:,0,X]-Sanalytic[:,0,X])
+    N=len(Snum)-1
+    errors=np.abs(Snum[N,0,X]-Sanalytic[N,0,X])
     totalError=np.sum(errors)
     return totalError
 
 #Calculates error for given method as a function of stepsize
-def errorVsStepsize(n,methodFunction,S0,T,mu,gamma,alfa,Hj): #n is the number of elements in hList
-    hList=np.linspace(0.01,1,n)
+def errorVsStepsize(methodFunction,S0,T,mu,gamma,alfa,Hj): #n is the number of elements in hList
+    hList=np.linspace(0.00001,0.1,5)
     errors=np.zeros(len(hList))
     i=0
     for hi in hList:

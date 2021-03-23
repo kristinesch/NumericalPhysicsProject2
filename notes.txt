@@ -1,9 +1,31 @@
 TO DO:
-Error as percentage? What is the best way to quantify the error?
+-Error as percentage? What is the best way to quantify the error?
+Implement error calculation as described in problem text!!
+LOG-LOG-PLOT!
+What happens if you decrease or increase the step size h? Quantify the
+error1 as the difference between the numerical and analytical solution after
+a certain simulation time, in dependence of the step size. Do a simulation
+with five different step sizes between 0.1 and 1 × 10−5 and present the
+step size dependent error in a log-log plot. It is enough if you do this
+analysis for only the x or the y component.
+
+-Profiling
+
+-Numba
+
+-fix animation: spin should point upwards
+
+-nicer arrows in animation?
 
 
+
+----------------------------------------------------------------------------------------------------------
 Data structure:
 
 N particles saved in N*3 array 
 each row is one particle, each column contains the spin component in each directions x, y and z
 
+---------------------------------------------------------------------------------------------------------
+
+Initial spin: tilted a little bit away from the z-axis. 
+Absolute value should ALWAYS be 1!!!
