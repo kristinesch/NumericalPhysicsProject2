@@ -8,7 +8,7 @@ X=0
 Y=1
 Z=2
 
-S=np.load("S1Heun.npy") 
+S=np.load("S1HeunDamped.npy") 
 
 fig = plt.figure()
 ax = fig.gca(projection='3d')

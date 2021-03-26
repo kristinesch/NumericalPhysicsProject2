@@ -36,13 +36,17 @@ def plot1Spin(S,ti):
 
 
 
-def plotXandYfor1Spin(S,t):
+def plotXYZ1Spin(S,t):
     x=S[:,:,X]
     y=S[:,:,Y]
-    length=np.sqrt(x*x+y*y)
-    plt.plot(t,x)
-    plt.plot(t,y)
-    plt.plot(t,length,color="red")
+    z=S[:,:,Z]
+    length=np.sqrt(x*x+y*y+z*z)
+    fig,ax=plt.subplots(1,1)
+    ax.plot(t,x)
+    ax.plot(t,y)
+    ax.plot(t,z)
+    ax.plot(t,length,color="red")
+    fig.savefig("1spin")
     plt.show()
 
 
@@ -70,12 +74,13 @@ def compareSolutions(SHeundFile,SEulerFile,SAnalyticFile,tFile,filename):
 
 
 def plotErrorVsStepsize(HeunError,HeunSteps,EulerError,EulerSteps,filename):
+    print("OK")
     fig, ax=plt.subplots(1,1)
     ax.set_xlabel("Step size")
     ax.set_ylabel("Error")
     fig.suptitle("Error as a function of step size")
-    ax.plot(HeunSteps,HeunError,label="Heun")
-    ax.plot(EulerSteps,EulerError,label="Euler")
+    ax.plot(np.log(HeunSteps),np.log(HeunError),label="Heun")
+    ax.plot(np.log(EulerSteps),np.log(EulerError),label="Euler")
     fig.legend()
     fig.savefig(filename)
     plt.show()

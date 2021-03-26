@@ -1,5 +1,6 @@
 import numpy as np
 from constants import *
+from numba import jit
 
 """Initialization"""
 #initialize spin array
@@ -10,8 +11,9 @@ from constants import *
 #B is the magnetic field
 
 #only 1 particle
+#@jit(nopython = True)
 def Hj1(B,mu): 
-    return -mu*B 
+    return mu*B 
 
 #multiple particles
 """
@@ -24,15 +26,18 @@ def H(S,J,B,mu):
 """
 
 """function for f(y,t) in Heun method"""
+@jit(nopython = True)
 def f(S,mu,gamma,alfa,H): #H and S are arrays of vectors
+    #print("alfa",alfa)
     ScrossH=np.cross(S,H) #cross product of S with H
     return (-gamma/(np.abs(mu)*(1+alfa*alfa)))*(ScrossH+np.cross((alfa*S),ScrossH))
 
 
 """Heun method"""
 
-
+#@jit(nopython = True)
 def Heun(h,S0,T,mu,gamma,alfa,Hj,oneSpin=False): #T is the total time
+    
     if oneSpin:
         N=1
     else: 
@@ -47,7 +52,7 @@ def Heun(h,S0,T,mu,gamma,alfa,Hj,oneSpin=False): #T is the total time
 
 """Euler method"""
 
-
+#@jit(nopython = True)
 def Euler(h,S0,T,mu,gamma,alfa,Hj,oneSpin=False):
     if oneSpin:
         N=1
@@ -63,7 +68,7 @@ def Euler(h,S0,T,mu,gamma,alfa,Hj,oneSpin=False):
 """Error estimate"""
 #Analytic solution for 1 particle, with magn.field in z-direction, and the spin in the xy-plane
 
-
+@jit(nopython = True)
 def analyticSol1Particle(h,T,S0,Hj):
     N=len(S0)
     t=np.arange(0,T,h)
@@ -81,6 +86,7 @@ def analyticSol1Particle(h,T,S0,Hj):
 
 #calculates total error: the difference between two arrays after a given time (last elements of arrays)
 #NB written for only 1 spin
+#@jit(nopython = True)
 def calculateError(Snum, Sanalytic): 
     #print("YO",Sanalytic)
     N=len(Snum)-1
@@ -89,11 +95,13 @@ def calculateError(Snum, Sanalytic):
     return totalError
 
 #Calculates error for given method as a function of stepsize
+#@jit(nopython = True)
 def errorVsStepsize(methodFunction,S0,T,mu,gamma,alfa,Hj): #n is the number of elements in hList
     hList=np.linspace(0.00001,0.1,5)
     errors=np.zeros(len(hList))
     i=0
     for hi in hList:
+        print(hi)
         Sanalytic,tana=analyticSol1Particle(hi,T,S0,Hj)
         Si,ti=methodFunction(hi,S0,T,mu,gamma,alfa,Hj,oneSpin=True)
         errors[i]=calculateError(Si,Sanalytic)
