@@ -63,7 +63,8 @@ def magnon(N,h,T,mu,gamma,alfa,Hj,J,B10,dz,plotfile,animationfile,B,plotTitle):
     plotXYZvsTime(SMag,tMag,plotfile," (J="+str(J)+", alfa="+str(alfa)+")",plotTitle)
 
 
-tenSpins=initSpins(10)
+
+
 #print(spinsWithTilt)
 #print(tenSpins)
 
@@ -74,28 +75,24 @@ print(lengths)
 """
 
 """GROUND STATES"""
-# tenSpins=initSpins(10)
-# S10,t10=HeunMethod(h,tenSpins,T,mu,gamma,alfa,Hj,J,B10,dz)
+tenSpins=initSpins(10)
+tenSpins=initSpins(10) 
 
 
-# plotXYZvsTime(S10,t10,"Jpos"," (J="+str(J)+", alfa="+str(alfa)+")","Ferromagnetic spins")
-# plotXYZvsTime(S10,t10,"Jneg"," (J="+str(J)+", alfa="+str(alfa)+")","Anti-ferromagnetic spins")
+# groundState(N,h,1000,mu,gamma,alfa,Hj,J,dz,B10) 
+# groundState(N,h,1000,mu,gamma,alfa,Hj,-J,dz,B10)
 
-groundState(N,h,500,mu,gamma,alfa,Hj,J,dz,B10)
-groundState(N,h,500,mu,gamma,alfa,Hj,-J,dz,B10)
+"""MAGNON"""
+Jmag=0
+alfaMag=0
+S1=initSpins(3)
+SMag,tMag=HeunMethod(h,S1,500,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
+plotXYZvsTime(SMag,tMag,"MagnonTest"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
 
-# """MAGNON"""
-
-# S1=initSpins(3)
-# print(S1)
-
-# SMag,tMag=HeunMethod(h,S1,T,mu,gamma,0,Hj,0,B10,dz)
-# plotXYZvsTime(SMag,tMag,"MagnonTest"," (J="+str(J)+", alfa="+str(alfa)+")","Spin chain")
-
-# #tilt 1st spin
-# spinsWithTilt=initTiltedSpin(10)
-# SMagTilt,tMagTilt=HeunMethod(h,spinsWithTilt,T,mu,gamma,0,Hj,0,B10,dz)
-# plotXYZvsTime(SMag,tMag,plotfile," (J="+str(J)+", alfa="+str(alfa)+")",plotTitle)
+#tilt 1st spins DELETE??
+spinsWithTilt=initTiltedSpin(10)
+SMagTilt,tMagTilt=HeunMethod(h,spinsWithTilt,1000,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
+plotXYZvsTime(SMag,tMag,"MagnonTestTilt"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
 
 
 

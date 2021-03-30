@@ -1,6 +1,8 @@
 TO DO:
 -change N in Heun and Euler for one particle
 
+-the time it takes for the ferromagnetic case to stabilize in the GS depends in a large degree on what the initial positions are
+
 -Update plots in the report
 
 -write all tasks into latex file to get a nice overview
