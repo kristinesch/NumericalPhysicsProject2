@@ -34,20 +34,20 @@ def plot1Spin3D(S,ti):
 
     plt.show()
 
+#slette???
 
-
-def plotXY1Spin(S,t):
-    x=S[:,:,X]
-    y=S[:,:,Y]
-    z=S[:,:,Z]
-    length=np.sqrt(x*x+y*y+z*z)
-    fig,ax=plt.subplots(1,1)
-    ax.plot(t,x)
-    ax.plot(t,y)
-    ax.plot(t,z)
-    ax.plot(t,length,color="red")
-    #fig.savefig("1spin")
-    plt.show()
+# def plotXY1Spin(S,t):
+#     x=S[:,:,X]
+#     y=S[:,:,Y]
+#     z=S[:,:,Z]
+#     length=np.sqrt(x*x+y*y+z*z)
+#     fig,ax=plt.subplots(1,1)
+#     ax.plot(t,x)
+#     ax.plot(t,y)
+#     ax.plot(t,z)
+#     ax.plot(t,length,color="red")
+#     #fig.savefig("1spin")
+#     plt.show()
 
 def plot1Spin(S,t):
     x=S[:,:,X]
@@ -103,11 +103,11 @@ def plotErrorVsStepsize(HeunError,HeunSteps,EulerError,EulerSteps,filename):
     fig.savefig(filename)
     plt.show()
 
-def plotZvsTime(S,t,filename):
+def plotZvsTime(S,t,filename,title):
     fig, ax=plt.subplots(3,1)
     print("S",len(S))
-    for i in range(len(S[0])-1):
-        print("YO")
+    for i in range(len(S[0])):
+        print("YO",i)
         ax[0].plot(t,S[:,i,X])
         ax[1].plot(t,S[:,i,Y])
         ax[2].plot(t,S[:,i,Z])
@@ -115,6 +115,9 @@ def plotZvsTime(S,t,filename):
     ax[0].set_ylabel("S_x")
     ax[1].set_ylabel("S_y")
     ax[2].set_ylabel("S_z")
+    for i in range(3):
+        ax[i].set_ylim(-1,1)
+    fig.suptitle(title)
     fig.savefig(filename)
     plt.show()
 
