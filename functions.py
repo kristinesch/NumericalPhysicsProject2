@@ -16,14 +16,17 @@ def Hj1(B,mu):
     return mu*B 
 
 #multiple particles
-"""
-def H(S,J,B,mu):
-    Hx=
-    Hy=
-    Hz=
+
+def H(S,J,B,mu,dz):
+    N=len(S)
+    H=np.zeros((N,3))
+    H[0]=0.5*J*(S[1])+dz*np.array([0,0,2*S[0,Z]])+mu*B
+    for j in range(1,N-1):
+        H[j]=0.5*J*(S[j-1]+S[j+1])+dz*np.array([0,0,2*S[j,Z]])+mu*B
+    H[N]=0.5*J*(S[N-1])+dz*np.array([0,0,2*S[N,Z]])+mu*B
     
 
-"""
+
 
 """function for f(y,t) in Heun method"""
 @jit(nopython = True)

@@ -13,12 +13,12 @@ H1=Hj1(B1,mu)
 # np.save("S1Heun",S1Heun)
 # np.save("t1Heun",t1Heun)
 
-#plot1Spin(S1,len(t1)-1)
+# plot1Spin3D(S1Heun,len(t1Heun)-1)
 
-#plotXandYfor1Spin(S1,t1)
-#plot1Spin(S1,len(t1)-1)
+# plotXY1Spin(S1Heun,t1Heun)
+# plot1Spin3D(S1Heun,len(t1Heun)-1)
 
-"""Comparison"""
+# """Comparison"""
 # S1Euler, t1Euler=Euler(h,S1init,T,mu,gamma,alfa,H1,oneSpin=True)
 # np.save("S1Euler",S1Euler)
 # np.save("t1Euler",t1Euler)
@@ -29,7 +29,7 @@ H1=Hj1(B1,mu)
 
 # print("calculations done")
 
-# #compareSolutions("S1Heun.npy","S1Euler.npy","S1Analytic.npy","t1Heun.npy","ComparisonPlot")
+# compareSolutions("S1Heun.npy","S1Euler.npy","S1Analytic.npy","t1Heun.npy","ComparisonPlot")
 
 # HeunError, HeunhList=errorVsStepsize(Heun,S1init,T,mu,gamma,alfa,H1)
 # print("yo")
@@ -47,4 +47,4 @@ S1HeunDamped, t1HeunDamped = Heun(h,S1init,T,mu,gamma,dampedAlfa,H1,oneSpin=True
 np.save("S1HeunDamped",S1HeunDamped)
 np.save("t1HeunDamped",t1HeunDamped)
 
-plotXYZ1Spin(S1HeunDamped,t1HeunDamped)
+plot1Spin(S1HeunDamped,t1HeunDamped)

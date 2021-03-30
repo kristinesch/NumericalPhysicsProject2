@@ -21,7 +21,7 @@ def plotLastFrame(S,ti):
 
 
 
-def plot1Spin(S,ti):
+def plot1Spin3D(S,ti):
     fig = plt.figure()
     ax = fig.gca(projection='3d')
 
@@ -36,7 +36,7 @@ def plot1Spin(S,ti):
 
 
 
-def plotXYZ1Spin(S,t):
+def plotXY1Spin(S,t):
     x=S[:,:,X]
     y=S[:,:,Y]
     z=S[:,:,Z]
@@ -46,8 +46,25 @@ def plotXYZ1Spin(S,t):
     ax.plot(t,y)
     ax.plot(t,z)
     ax.plot(t,length,color="red")
-    fig.savefig("1spin")
+    #fig.savefig("1spin")
     plt.show()
+
+def plot1Spin(S,t):
+    x=S[:,:,X]
+    y=S[:,:,Y]
+    z=S[:,:,Z]
+    length=np.sqrt(x*x+y*y+z*z)
+    fig,ax=plt.subplots(2,1)
+    ax[0].plot(t,x,label="x")
+    ax[0].plot(t,y,label="y")
+    # ax[0].set_xlabel("time")
+    # ax[0].set_ylabel("coordinate")
+    ax[1].plot(t,z,label="z")
+    ax[1].plot(t,length,label="Length")
+    ax[1].set_xlabel("time")
+    ax[1].set_ylabel("coordinate")
+    fig.legend()
+    fig.savefig("Coordinates of spin vector")
 
 
 
