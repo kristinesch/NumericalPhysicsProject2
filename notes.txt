@@ -1,6 +1,8 @@
 TO DO:
 -change N in Heun and Euler for one particle
 
+-Update plots in the report
+
 -write all tasks into latex file to get a nice overview
 -start describing the method in the report
 -Finish task 1.3!!

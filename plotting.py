@@ -103,7 +103,7 @@ def plotErrorVsStepsize(HeunError,HeunSteps,EulerError,EulerSteps,filename):
     fig.savefig(filename)
     plt.show()
 
-def plotZvsTime(S,t,filename,title):
+def plotXYZvsTime(S,t,filename,title,plotTitle):
     fig, ax=plt.subplots(3,1)
     print("S",len(S))
     for i in range(len(S[0])):
@@ -112,12 +112,12 @@ def plotZvsTime(S,t,filename,title):
         ax[1].plot(t,S[:,i,Y])
         ax[2].plot(t,S[:,i,Z])
     ax[2].set_xlabel("time")
-    ax[0].set_ylabel("S_x")
-    ax[1].set_ylabel("S_y")
-    ax[2].set_ylabel("S_z")
+    ax[0].set_ylabel("$S_{x}$")
+    ax[1].set_ylabel("$S_{y}$")
+    ax[2].set_ylabel("$S_{z}$")
     for i in range(3):
         ax[i].set_ylim(-1,1)
-    fig.suptitle(title)
+    fig.suptitle(plotTitle+title)
     fig.savefig(filename)
     plt.show()
 

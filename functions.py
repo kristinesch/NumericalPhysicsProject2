@@ -28,6 +28,15 @@ def Hj(S,J,B,mu,dz): #S is an array with dim (N,3)
     Hj[N-1]=0.5*J*(S[N-2])+dz*np.array([0,0,2*S[N-1,Z]])+mu*B
     return Hj
 
+def HjInf(S,J,B,mu,dz): #with out BCs
+    N=len(S)
+    Hj=np.zeros((N,3))
+    Hj[0]=0.5*J*(S[1]+S[-1])+dz*np.array([0,0,2*S[0,Z]])+mu*B
+    for j in range(1,N-1):
+        #print(Hj[i,j])
+        Hj[j]=0.5*J*(S[j-1]+S[j+1])+dz*np.array([0,0,2*S[j,Z]])+mu*B
+    Hj[N-1]=0.5*J*(S[N-2]+S[0])+dz*np.array([0,0,2*S[N-1,Z]])+mu*B
+    return Hj
 
 
 """function for f(y,t) in Heun method"""
@@ -35,8 +44,6 @@ def Hj(S,J,B,mu,dz): #S is an array with dim (N,3)
 def f(S,mu,gamma,alfa,H): #H and S are arrays of vectors
     ScrossH=np.cross(S,H) #cross product of S with 
     return (-gamma/(np.abs(mu)*(1+alfa*alfa)))*(ScrossH+np.cross((alfa*S),ScrossH))
-
-
 
 
 
