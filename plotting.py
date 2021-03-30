@@ -65,6 +65,7 @@ def plot1Spin(S,t):
     ax[1].set_ylabel("coordinate")
     fig.legend()
     fig.savefig("Coordinates of spin vector")
+    plt.show()
 
 
 
@@ -99,6 +100,21 @@ def plotErrorVsStepsize(HeunError,HeunSteps,EulerError,EulerSteps,filename):
     ax.plot(np.log(HeunSteps),np.log(HeunError),label="Heun")
     ax.plot(np.log(EulerSteps),np.log(EulerError),label="Euler")
     fig.legend()
+    fig.savefig(filename)
+    plt.show()
+
+def plotZvsTime(S,t,filename):
+    fig, ax=plt.subplots(3,1)
+    print("S",len(S))
+    for i in range(len(S[0])-1):
+        print("YO")
+        ax[0].plot(t,S[:,i,X])
+        ax[1].plot(t,S[:,i,Y])
+        ax[2].plot(t,S[:,i,Z])
+    ax[2].set_xlabel("time")
+    ax[0].set_ylabel("S_x")
+    ax[1].set_ylabel("S_y")
+    ax[2].set_ylabel("S_z")
     fig.savefig(filename)
     plt.show()
 

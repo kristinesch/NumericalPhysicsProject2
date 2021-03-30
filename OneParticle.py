@@ -3,6 +3,14 @@ from plotting import *
 
 #%load_ext line_profiler
 
+h=0.01
+alfa=0 #damping
+gamma=1 #idk
+#J=1 #Coupling, not yet used
+mu=1 #idk
+B0=1 #idk??
+dz=0.01
+
 B1=np.array([0,0,B0])
 theta=np.pi/9
 S1init=np.array([np.sin(theta),0,np.cos(theta)])
@@ -43,8 +51,10 @@ H1=Hj1(B1,mu)
 
 """With damping"""
 dampedAlfa=0.05
+print("OK")
 S1HeunDamped, t1HeunDamped = Heun(h,S1init,T,mu,gamma,dampedAlfa,H1,oneSpin=True)
 np.save("S1HeunDamped",S1HeunDamped)
 np.save("t1HeunDamped",t1HeunDamped)
 
 plot1Spin(S1HeunDamped,t1HeunDamped)
+print("done")
