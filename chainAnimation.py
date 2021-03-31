@@ -2,14 +2,19 @@
 """ANIMATION"""
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
+
+# import matplotlib as mpl 
+# mpl.rcParams['animation.ffmpeg_path'] = r'C:\\Users\\krist\\Documents\\Dokumenter\\H19\\ffmpeg\\bin\\ffmpeg.exe'
+#writer = animation.PillowWriter(fps=10) 
 
 #for only 1 spin first
 X=0
 Y=1
 Z=2
 
-S=np.load("contBCani.npy") 
+S=np.load("antiFerroAni.npy") 
 
 fig = plt.figure()
 ax = fig.gca(projection='3d')
@@ -30,6 +35,8 @@ W=S[0,:,Z]
 Q=ax.quiver(x, y, z, U, V, W, length=0.1, normalize=True)
 
 
+
+
 def updateAni(ti):
     global Q
     global S
@@ -44,5 +51,6 @@ def updateAni(ti):
 
 
 ani=FuncAnimation(fig,updateAni,blit=False)
+#ani.save("spinChain.gif",writer=writer)
 plt.show()
 print("OK")

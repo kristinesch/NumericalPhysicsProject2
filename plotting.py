@@ -49,12 +49,13 @@ def plot1Spin3D(S,ti):
 #     #fig.savefig("1spin")
 #     plt.show()
 
-def plot1Spin(S,t):
+def plot1Spin(S,t,filename,plotTitle):
     x=S[:,:,X]
     y=S[:,:,Y]
     z=S[:,:,Z]
     length=np.sqrt(x*x+y*y+z*z)
     fig,ax=plt.subplots(2,1)
+    fig.suptitle(plotTitle)
     ax[0].plot(t,x,label="x")
     ax[0].plot(t,y,label="y")
     # ax[0].set_xlabel("time")
@@ -62,9 +63,9 @@ def plot1Spin(S,t):
     ax[1].plot(t,z,label="z")
     ax[1].plot(t,length,label="Length")
     ax[1].set_xlabel("time")
-    ax[1].set_ylabel("coordinate")
+    #ax[1].set_ylabel("coordinate")
     fig.legend()
-    fig.savefig("Coordinates of spin vector")
+    fig.savefig(filename)
     plt.show()
 
 
@@ -118,6 +119,16 @@ def plotXYZvsTime(S,t,filename,title,plotTitle):
     for i in range(3):
         ax[i].set_ylim(-1,1)
     fig.suptitle(plotTitle+title)
+    fig.savefig(filename)
+    plt.show()
+
+def plotZvsTime(S,t,title,filename):
+    fig, ax=plt.subplots(1,1)
+    for i in range(len(S[0])):
+        ax.plot(t,S[:,i,Z])
+    ax.set_xlabel("time")
+    ax.set_ylabel("z")
+    fig.suptitle(title)
     fig.savefig(filename)
     plt.show()
 

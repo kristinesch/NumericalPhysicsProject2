@@ -1,4 +1,6 @@
 TO DO:
+-SAVE ANIMATION
+
 -change N in Heun and Euler for one particle
 
 -the time it takes for the ferromagnetic case to stabilize in the GS depends in a large degree on what the initial positions are
@@ -22,8 +24,6 @@ analysis for only the x or the y component.
 -Profiling
 
 -Numba
-
--fix animation: spin should point upwards
 
 -nicer arrows in animation?
 

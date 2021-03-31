@@ -14,16 +14,16 @@ dz=0.01
 B1=np.array([0,0,B0])
 theta=np.pi/9
 S1init=np.array([np.sin(theta),0,np.cos(theta)])
-T=100
+T=50
 H1=Hj1(B1,mu)
 
-# S1Heun, t1Heun = Heun(h,S1init,T,mu,gamma,alfa,H1,oneSpin=True)
+S1Heun, t1Heun = Heun(h,S1init,T,mu,gamma,alfa,H1,oneSpin=True)
 # np.save("S1Heun",S1Heun)
 # np.save("t1Heun",t1Heun)
 
 # plot1Spin3D(S1Heun,len(t1Heun)-1)
 
-# plotXY1Spin(S1Heun,t1Heun)
+plot1Spin(S1Heun,t1Heun,"1spin", "Spin coordinates")
 # plot1Spin3D(S1Heun,len(t1Heun)-1)
 
 # """Comparison"""
@@ -56,5 +56,5 @@ S1HeunDamped, t1HeunDamped = Heun(h,S1init,T,mu,gamma,dampedAlfa,H1,oneSpin=True
 np.save("S1HeunDamped",S1HeunDamped)
 np.save("t1HeunDamped",t1HeunDamped)
 
-plot1Spin(S1HeunDamped,t1HeunDamped)
+plot1Spin(S1HeunDamped,t1HeunDamped, "Coordinates of spin vector", "Spin coordinates, with damping")
 print("done")

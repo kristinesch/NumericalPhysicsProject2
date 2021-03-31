@@ -83,16 +83,16 @@ tenSpins=initSpins(10)
 # groundState(N,h,1000,mu,gamma,alfa,Hj,-J,dz,B10)
 
 """MAGNON"""
-Jmag=0
-alfaMag=0
-S1=initSpins(3)
-SMag,tMag=HeunMethod(h,S1,500,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
-plotXYZvsTime(SMag,tMag,"MagnonTest"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
+# Jmag=0
+# alfaMag=0
+# S1=initSpins(3)
+# SMag,tMag=HeunMethod(h,S1,500,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
+# plotXYZvsTime(SMag,tMag,"MagnonTest"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
 
-#tilt 1st spins DELETE??
-spinsWithTilt=initTiltedSpin(10)
-SMagTilt,tMagTilt=HeunMethod(h,spinsWithTilt,1000,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
-plotXYZvsTime(SMag,tMag,"MagnonTestTilt"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
+# #tilt 1st spins DELETE??
+# spinsWithTilt=initTiltedSpin(10)
+# SMagTilt,tMagTilt=HeunMethod(h,spinsWithTilt,1000,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
+# plotXYZvsTime(SMag,tMag,"MagnonTestTilt"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
 
 
 
@@ -104,7 +104,24 @@ plotXYZvsTime(SMag,tMag,"MagnonTestTilt"," (J="+str(Jmag)+", alfa="+str(alfaMag)
 #magnon(N,h,20,mu,gamma,0,Hj,J,B10,dz,"noDamping","noDampingAni",B10,"Spin chain")
 
 """Basic magnon"""
-#magnon(N,h,20,mu,gamma,alfa,Hj,J,B10,dz,"basic","basicAni",B10,"Spin chain")
+#magnon(N,h,100,mu,gamma,alfa,Hj,J,B10,dz,"basic","basicAni",B10,"Spin chain")
 
 """periodic BCs"""
-#magnon(N,h,20,mu,gamma,0,HjInf,J,B10,dz,"periodicBC","periodicBCani",B10, "Spin chain with periodic BCs")
+#magnon(N,h,20,mu,gamma,alfa,HjInf,J,B10,dz,"periodicBC","periodicBCani",B10, "Spin chain with periodic BCs")
+
+"""Antiferromagnetic coupling"""
+#magnon(N,h,200,mu,gamma,alfa,Hj,-J,B10,dz,"antiFerro","antiFerroAni",B10, "Spin chain with antiferromagnetic coupling")
+
+
+"""MAGNETIZATION"""
+
+"""Plot Z component of basic magnon"""
+spins=initTiltedSpin(10)
+S,t=HeunMethod(h,spins,1000,mu,gamma,alfa,Hj,J,B10,dz)
+#plotZvsTime(S,t,"Spin chain with coupling and damping","basicZ")
+
+totZ=[]
+for i in range(len(t)):
+    totZ.append(np.sum(S[i,:,Z]))
+plt.plot(t,totZ)
+plt.show()
