@@ -23,7 +23,7 @@ S1Heun, t1Heun = Heun(h,S1init,T,mu,gamma,alfa,H1,oneSpin=True)
 
 # plot1Spin3D(S1Heun,len(t1Heun)-1)
 
-plot1Spin(S1Heun,t1Heun,"1spin", "Spin coordinates")
+#plot1Spin(S1Heun,t1Heun,"1spin", "Spin coordinates")
 # plot1Spin3D(S1Heun,len(t1Heun)-1)
 
 # """Comparison"""
@@ -40,21 +40,23 @@ plot1Spin(S1Heun,t1Heun,"1spin", "Spin coordinates")
 # compareSolutions("S1Heun.npy","S1Euler.npy","S1Analytic.npy","t1Heun.npy","ComparisonPlot")
 
 # HeunError, HeunhList=errorVsStepsize(Heun,S1init,T,mu,gamma,alfa,H1)
-# print("yo")
 # EulerError, EulerhList=errorVsStepsize(Euler,S1init,T,mu,gamma,alfa,H1)
-
 # plotErrorVsStepsize(HeunError,HeunhList,EulerError, EulerhList,"ErrorPlot")
-# print("done")
 
 #%lprun -f plotErrorVsStepsize x = plotErrorVsStepsize(HeunError,HeunhList,EulerError, EulerhList,"test")
 
 
 """With damping"""
 dampedAlfa=0.05
-print("OK")
-S1HeunDamped, t1HeunDamped = Heun(h,S1init,T,mu,gamma,dampedAlfa,H1,oneSpin=True)
-np.save("S1HeunDamped",S1HeunDamped)
-np.save("t1HeunDamped",t1HeunDamped)
+# print("OK")
+# S1HeunDamped, t1HeunDamped = Heun(h,S1init,T,mu,gamma,dampedAlfa,H1,oneSpin=True)
+# np.save("S1HeunDamped",S1HeunDamped)
+# np.save("t1HeunDamped",t1HeunDamped)
+#plot1Spin(S1HeunDamped,t1HeunDamped, "Coordinates of spin vector", "Spin coordinates, with damping")
 
-plot1Spin(S1HeunDamped,t1HeunDamped, "Coordinates of spin vector", "Spin coordinates, with damping")
+"""LIFETIME"""
 print("done")
+tau=mu/(dampedAlfa*gamma*H1[Z])
+l0=np.sqrt(S1init[X]*S1init[X]+S1init[Y]*S1init[Y])
+S1l, t1l= Heun(h,S1init,T,mu,gamma,dampedAlfa,H1,oneSpin=True)
+plot1spinLifetime(S1l,t1l,tau,"lifetime","Decay of amplitudes, alpha="+str(dampedAlfa),l0)

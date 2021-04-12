@@ -10,7 +10,6 @@ import matplotlib as mpl
 mpl.rcParams['animation.ffmpeg_path'] = r'C:\\Users\\krist\\Documents\\Dokumenter\\H19\\ffmpeg\\bin\\ffmpeg.exe'
 writer = animation.PillowWriter(fps=30) 
 
-#for only 1 spin first
 X=0
 Y=1
 Z=2
@@ -21,7 +20,7 @@ fig = plt.figure()
 ax = fig.gca(projection='3d')
 
 # Make the grid
-x=np.linspace(-100,100,10)
+x=np.linspace(-0.2,0.2,10)
 y=np.zeros(10)
 z=np.zeros(10)
 #xx, yy, zz = np.meshgrid(x,y,z)
@@ -33,14 +32,15 @@ U=S[0,:,X]
 V=S[0,:,Y]
 W=S[0,:,Z]
 
-# ax.set_xlim(-10,10)
-# ax.set_ylim(-10,10)
-#ax.set_zlim(-0.5,0.5)
+l=0.2
+ax.set_xlim(-l,l)
+ax.set_ylim(-l,l)
+ax.set_zlim(-l,l)
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_zlabel('z')
 
-Q=ax.quiver(x, y, z, U, V, W, length=0.1, normalize=True)
+Q=ax.quiver(x, y, z, U, V, W, length=0.5, normalize=True)
 
 
 
@@ -51,9 +51,9 @@ def updateAni(ti):
     global xx
     global yy
     global zz
-    U=S[ti*10,:,X]
-    V=S[ti*10,:,Y]
-    W=S[ti*10,:,Z]
+    U=S[ti*50,:,X]
+    V=S[ti*50,:,Y]
+    W=S[ti*50,:,Z]
     Q.remove()
     Q=ax.quiver(x, y, z, U, V, W, length=0.1, normalize=True)
 

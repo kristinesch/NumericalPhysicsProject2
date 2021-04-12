@@ -1,7 +1,14 @@
 """ANIMATION"""
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.animation as animation
 from matplotlib.animation import FuncAnimation
+
+import PIL
+
+import matplotlib as mpl 
+mpl.rcParams['animation.ffmpeg_path'] = r'C:\\Users\\krist\\Documents\\Dokumenter\\H19\\ffmpeg\\bin\\ffmpeg.exe'
+writer = animation.PillowWriter(fps=30) 
 
 #for only 1 spin first
 X=0
@@ -40,5 +47,7 @@ def updateAni(ti):
 
 
 ani=FuncAnimation(fig,updateAni,blit=False)
+f = r"C:\\Users\\krist\\Documents\\Dokumenter\\V21\\Numerisk fysikk\\NumericalPhysicsProject2\\1spin.gif" 
+ani.save(f,writer=writer)
 plt.show()
 print("OK")

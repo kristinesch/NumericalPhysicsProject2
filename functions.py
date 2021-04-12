@@ -117,7 +117,7 @@ def analyticSol1Particle(h,T,S0,Hj,gamma,mu):
     for i in range(len(t)):
         S[i,X]=x0*np.cos(theta*t[i])-y0*np.sin(theta*t[i])
         S[i,Y]=x0*np.sin(theta*t[i])+y0*np.cos(theta*t[i])
-        S[i,Z]=0
+        S[i,Z]=0  #z0???????
     return S, t
 
 

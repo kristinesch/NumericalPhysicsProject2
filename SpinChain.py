@@ -75,42 +75,43 @@ print(lengths)
 """
 
 """GROUND STATES"""
-tenSpins=initSpins(10)
-tenSpins=initSpins(10) 
+# tenSpins=initSpins(10)
+# tenSpins=initSpins(10) 
 
 
-# groundState(N,h,1000,mu,gamma,alfa,Hj,J,dz,B10) 
-# groundState(N,h,1000,mu,gamma,alfa,Hj,-J,dz,B10)
+# groundState(N,h,200,mu,gamma,alfa,Hj,J,dz,B10) 
+# groundState(N,h,200,mu,gamma,alfa,Hj,-J,dz,B10)
 
 """MAGNON"""
-# Jmag=0
-# alfaMag=0
-# S1=initSpins(3)
-# SMag,tMag=HeunMethod(h,S1,500,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
-# plotXYZvsTime(SMag,tMag,"MagnonTest"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
+Jmag=0
+alfaMag=0
+S1=initSpins(3)
+SMag,tMag=HeunMethod(h,S1,500,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
+plotXYZvsTime(SMag,tMag,"MagnonTest"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
 
-# #tilt 1st spins DELETE??
-# spinsWithTilt=initTiltedSpin(10)
-# SMagTilt,tMagTilt=HeunMethod(h,spinsWithTilt,1000,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
-# plotXYZvsTime(SMag,tMag,"MagnonTestTilt"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
+#tilt 1st spins DELETE??
+spinsWithTilt=initTiltedSpin(10)
+SMagTilt,tMagTilt=HeunMethod(h,spinsWithTilt,1000,mu,gamma,alfaMag,Hj,Jmag,B10,dz)
+plotXYZvsTime(SMag,tMag,"MagnonTestTilt"," (J="+str(Jmag)+", alfa="+str(alfaMag)+")","Spin chain without coupling")
 
 
 
 
 """Damping and coupling off"""
-#magnon(N,h,100,mu,gamma,0,Hj,0,B10,dz,"noDampingOrCoupling","noDampingOrCouplingAni",B10,"Spin chain")
+magnon(N,h,100,mu,gamma,0,Hj,0,B10,dz,"noDampingOrCoupling","noDampingOrCouplingAni",B10,"Spin chain")
 
 """Damping off"""
-#magnon(N,h,20,mu,gamma,0,Hj,J,B10,dz,"noDamping","noDampingAni",B10,"Spin chain")
+magnon(N,h,20,mu,gamma,0,Hj,J,B10,dz,"noDamping","noDampingAni",B10,"Spin chain")
 
 """Basic magnon"""
-#magnon(N,h,100,mu,gamma,alfa,Hj,J,B10,dz,"basic","basicAni",B10,"Spin chain")
+magnon(N,h,100,mu,gamma,alfa,Hj,J,B10,dz,"basic","basicAni",B10,"Spin chain")
 
 """periodic BCs"""
-#magnon(N,h,20,mu,gamma,alfa,HjInf,J,B10,dz,"periodicBC","periodicBCani",B10, "Spin chain with periodic BCs")
+magnon(N,h,20,mu,gamma,alfa,HjInf,J,B10,dz,"periodicBC","periodicBCani",B10, "Spin chain with periodic BCs")
 
 """Antiferromagnetic coupling"""
-#magnon(N,h,200,mu,gamma,alfa,Hj,-J,B10,dz,"antiFerro","antiFerroAni",B10, "Spin chain with antiferromagnetic coupling")
+magnon(N,h,200,mu,gamma,alfa,Hj,-J,B10,dz,"antiFerro","antiFerroAni",B10, "Spin chain with antiferromagnetic coupling")
+
 
 
 """MAGNETIZATION"""
@@ -125,3 +126,14 @@ for i in range(len(t)):
     totZ.append(np.sum(S[i,:,Z]))
 plt.plot(t,totZ)
 plt.show()
+
+"""3D PLOTS OF FINAL SPINS"""
+#ferromagnetic coupling
+spins=initSpins(10)
+SMag,tMag=HeunMethod(h,spins,500,mu,gamma,alfa,Hj,J,B10,dz)
+plotFinalPosition(SMag,tMag,"Spin directions after simulation for ferromagnetic coupling","finalFerro")
+
+#antiferromagnetic coupling
+spins=initSpins(10)
+SMag,tMag=HeunMethod(h,spins,500,mu,gamma,alfa,Hj,-J,B10,dz)
+plotFinalPosition(SMag,tMag,"Spin directions after simulation for anti-ferromagnetic coupling","finalAntiFerro")

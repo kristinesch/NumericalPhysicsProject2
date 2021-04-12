@@ -34,20 +34,7 @@ def plot1Spin3D(S,ti):
 
     plt.show()
 
-#slette???
 
-# def plotXY1Spin(S,t):
-#     x=S[:,:,X]
-#     y=S[:,:,Y]
-#     z=S[:,:,Z]
-#     length=np.sqrt(x*x+y*y+z*z)
-#     fig,ax=plt.subplots(1,1)
-#     ax.plot(t,x)
-#     ax.plot(t,y)
-#     ax.plot(t,z)
-#     ax.plot(t,length,color="red")
-#     #fig.savefig("1spin")
-#     plt.show()
 
 def plot1Spin(S,t,filename,plotTitle):
     x=S[:,:,X]
@@ -56,14 +43,27 @@ def plot1Spin(S,t,filename,plotTitle):
     length=np.sqrt(x*x+y*y+z*z)
     fig,ax=plt.subplots(2,1)
     fig.suptitle(plotTitle)
-    ax[0].plot(t,x,label="x")
-    ax[0].plot(t,y,label="y")
+    ax[0].plot(t,x,label="x",color="blue")
+    ax[0].plot(t,y,label="y",color="red")
     # ax[0].set_xlabel("time")
     # ax[0].set_ylabel("coordinate")
-    ax[1].plot(t,z,label="z")
-    ax[1].plot(t,length,label="Length")
+    ax[1].plot(t,z,label="z",color="green")
+    ax[1].plot(t,length,label="Length",color="orange")
     ax[1].set_xlabel("time")
     #ax[1].set_ylabel("coordinate")
+    fig.legend()
+    fig.savefig(filename)
+    plt.show()
+
+def plot1spinLifetime(S,t,tau,filename,plotTitle,l0):
+    decay=l0*np.exp(-t/tau)
+    x=S[:,:,X]
+    y=S[:,:,Y]
+    fig,ax=plt.subplots(1,1)
+    fig.suptitle(plotTitle)
+    ax.plot(t,x,label="x",color="blue")
+    ax.plot(t,y,label="y",color="green")
+    ax.plot(t,decay,label="exponential decay",color="red")
     fig.legend()
     fig.savefig(filename)
     plt.show()
@@ -98,8 +98,12 @@ def plotErrorVsStepsize(HeunError,HeunSteps,EulerError,EulerSteps,filename):
     ax.set_xlabel("Step size")
     ax.set_ylabel("Error")
     fig.suptitle("Error as a function of step size")
-    ax.plot(np.log(HeunSteps),np.log(HeunError),label="Heun")
-    ax.plot(np.log(EulerSteps),np.log(EulerError),label="Euler")
+    # ax.plot(np.log(HeunSteps),np.log(HeunError),label="Heun")
+    # ax.plot(np.log(EulerSteps),np.log(EulerError),label="Euler")
+    ax.plot(HeunSteps,HeunError,label="Heun")
+    ax.plot(EulerSteps,EulerError,label="Euler")
+    ax.set_xscale('log')
+    ax.set_yscale('log')
     fig.legend()
     fig.savefig(filename)
     plt.show()
@@ -108,7 +112,6 @@ def plotXYZvsTime(S,t,filename,title,plotTitle):
     fig, ax=plt.subplots(3,1)
     print("S",len(S))
     for i in range(len(S[0])):
-        print("YO",i)
         ax[0].plot(t,S[:,i,X])
         ax[1].plot(t,S[:,i,Y])
         ax[2].plot(t,S[:,i,Z])
@@ -131,5 +134,31 @@ def plotZvsTime(S,t,title,filename):
     fig.suptitle(title)
     fig.savefig(filename)
     plt.show()
+
+def plotFinalPosition(S,t,title,filename):
+
+    fig = plt.figure()
+    ax = fig.gca(projection='3d')
+
+    # Make the grid
+    x=np.linspace(-0.2,0.2,10)
+    y=np.zeros(10)
+    z=np.zeros(10)
+    n=len(S)
+    U=S[n-1,:,X]
+    V=S[n-1,:,Y]
+    W=S[n-1,:,Z]
+
+    l=0.2
+    ax.set_xlim(-l,l)
+    ax.set_ylim(-l,l)
+    ax.set_zlim(-l,l)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    fig.suptitle(title)
+
+    ax.quiver(x, y, z, U, V, W, length=0.1, normalize=True)
+    fig.savefig(filename)
 
 
