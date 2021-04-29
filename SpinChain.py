@@ -120,20 +120,24 @@ magnon(N,h,200,mu,gamma,alfa,Hj,-J,B10,dz,"antiFerro","antiFerroAni",B10, "Spin 
 spins=initTiltedSpin(10)
 S,t=HeunMethod(h,spins,1000,mu,gamma,alfa,Hj,J,B10,dz)
 #plotZvsTime(S,t,"Spin chain with coupling and damping","basicZ")
-
-totZ=[]
-for i in range(len(t)):
-    totZ.append(np.sum(S[i,:,Z]))
-plt.plot(t,totZ)
-plt.show()
+def plotTotalZ(S,t,filename):
+    fig,ax=plt.subplots(1,1)
+    totZ=[]
+    for i in range(len(t)):
+        totZ.append(np.sum(S[i,:,Z]))
+    ax.plot(t,totZ)
+    fig.suptitle("Total")
+    fig.savefig(filename)
+    plt.show()
+plotTotalZ(S, t, "totalZ")
 
 """3D PLOTS OF FINAL SPINS"""
 #ferromagnetic coupling
 spins=initSpins(10)
 SMag,tMag=HeunMethod(h,spins,500,mu,gamma,alfa,Hj,J,B10,dz)
-plotFinalPosition(SMag,tMag,"Spin directions after simulation for ferromagnetic coupling","finalFerro")
+#plotFinalPosition(SMag,tMag,"Spin directions after simulation for ferromagnetic coupling","finalFerro")
 
 #antiferromagnetic coupling
 spins=initSpins(10)
 SMag,tMag=HeunMethod(h,spins,500,mu,gamma,alfa,Hj,-J,B10,dz)
-plotFinalPosition(SMag,tMag,"Spin directions after simulation for anti-ferromagnetic coupling","finalAntiFerro")
+#plotFinalPosition(SMag,tMag,"Spin directions after simulation for anti-ferromagnetic coupling","finalAntiFerro")

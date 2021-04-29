@@ -5,10 +5,10 @@ from plotting import *
 
 h=0.01
 alfa=0 #damping
-gamma=1 #idk
+gamma=1 
 #J=1 #Coupling, not yet used
-mu=1 #idk
-B0=1 #idk??
+mu=1 
+B0=1 
 dz=0.01
 
 B1=np.array([0,0,B0])

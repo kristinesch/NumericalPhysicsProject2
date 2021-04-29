@@ -14,7 +14,7 @@ X=0
 Y=1
 Z=2
 
-S=np.load("basicAni.npy") 
+S=np.load("antiFerroAni.npy") 
 
 fig = plt.figure()
 ax = fig.gca(projection='3d')
@@ -60,7 +60,7 @@ def updateAni(ti):
 
 ani=FuncAnimation(fig,updateAni,blit=False,save_count=200)
 
-f = r"C:\\Users\\krist\\Documents\\Dokumenter\\V21\\Numerisk fysikk\\NumericalPhysicsProject2\\spinChain.gif" 
+f = r"C:\\Users\\krist\\Documents\\Dokumenter\\V21\\Numerisk fysikk\\NumericalPhysicsProject2\\antiFerroSpinChain.gif" 
 ani.save(f,writer=writer)
 plt.show()
 

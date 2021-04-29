@@ -3,23 +3,7 @@ TO DO:
 
 -change N in Heun and Euler for one particle
 
--the time it takes for the ferromagnetic case to stabilize in the GS depends in a large degree on what the initial positions are
 
--Update plots in the report
-
--write all tasks into latex file to get a nice overview
--start describing the method in the report
--Finish task 1.3!!
-
--Error as percentage? What is the best way to quantify the error?
-Implement error calculation as described in problem text!!
-LOG-LOG-PLOT!
-What happens if you decrease or increase the step size h? Quantify the
-error1 as the difference between the numerical and analytical solution after
-a certain simulation time, in dependence of the step size. Do a simulation
-with five different step sizes between 0.1 and 1 × 10−5 and present the
-step size dependent error in a log-log plot. It is enough if you do this
-analysis for only the x or the y component.
 
 -Profiling
 

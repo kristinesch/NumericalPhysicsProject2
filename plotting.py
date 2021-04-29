@@ -77,7 +77,6 @@ def compareSolutions(SHeundFile,SEulerFile,SAnalyticFile,tFile,filename):
     SAnalytic=np.load(SAnalyticFile)
     t=np.load(tFile)
 
-
     #Plotting:
     fig, ax=plt.subplots(1,1)
     ax.set_xlabel("time")

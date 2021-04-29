@@ -2,8 +2,6 @@ import numpy as np
 from constants import *
 from numba import jit
 
-"""Initialization"""
-#initialize spin array
 
 """Function returning Hj"""
 #J is a constant
@@ -23,12 +21,11 @@ def Hj(S,J,B,mu,dz): #S is an array with dim (N,3)
     Hj=np.zeros((N,3))
     Hj[0]=0.5*J*(S[1])+dz*np.array([0,0,2*S[0,Z]])+mu*B
     for j in range(1,N-1):
-        #print(Hj[i,j])
         Hj[j]=0.5*J*(S[j-1]+S[j+1])+dz*np.array([0,0,2*S[j,Z]])+mu*B
     Hj[N-1]=0.5*J*(S[N-2])+dz*np.array([0,0,2*S[N-1,Z]])+mu*B
     return Hj
 
-def HjInf(S,J,B,mu,dz): #with out BCs
+def HjInf(S,J,B,mu,dz): #periodic BCs
     N=len(S)
     Hj=np.zeros((N,3))
     Hj[0]=0.5*J*(S[1]+S[-1])+dz*np.array([0,0,2*S[0,Z]])+mu*B
@@ -44,7 +41,6 @@ def HjInf(S,J,B,mu,dz): #with out BCs
 def f(S,mu,gamma,alfa,H): #H and S are arrays of vectors
     ScrossH=np.cross(S,H) #cross product of S with 
     return (-gamma/(np.abs(mu)*(1+alfa*alfa)))*(ScrossH+np.cross((alfa*S),ScrossH))
-
 
 
 
@@ -94,7 +90,7 @@ def Euler(h,S0,T,mu,gamma,alfa,Hj,oneSpin=False):
     if oneSpin:
         N=1
     else: 
-        N=len(S0) #S0 ikke [0]!!
+        N=len(S0) 
     t=np.arange(0,T,h)
     S=np.zeros((len(t),N,3))
     S[0]=S0.copy()
@@ -112,12 +108,13 @@ def analyticSol1Particle(h,T,S0,Hj,gamma,mu):
     S=np.zeros((len(t),N,3))
     x0=S0[X]
     y0=S0[Y]
+    z0=S0[Z]
     Hz=Hj[Z]
     theta=gamma*Hz/mu
     for i in range(len(t)):
         S[i,X]=x0*np.cos(theta*t[i])-y0*np.sin(theta*t[i])
         S[i,Y]=x0*np.sin(theta*t[i])+y0*np.cos(theta*t[i])
-        S[i,Z]=0  #z0???????
+        S[i,Z]=z0
     return S, t
 
 
@@ -125,7 +122,6 @@ def analyticSol1Particle(h,T,S0,Hj,gamma,mu):
 #NB written for only 1 spin
 #@jit(nopython = True)
 def calculateError(Snum, Sanalytic): 
-    #print("YO",Sanalytic)
     N=len(Snum)-1
     errors=np.abs(Snum[N,0,X]-Sanalytic[N,0,X])
     totalError=np.sum(errors)
